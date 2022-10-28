@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import {useState,useEffect} from 'react';
 
 
@@ -8,21 +8,21 @@ function Edituser(){
         Name:"",
         Email:"",
         number:""
-    })
+    });
     function changeHandler1(e){
         setnewdata({
            ...newdata, Name:e.target.value
-        })
+        });
     }
     function changeHandler2(e){
         setnewdata({
            ...newdata, Email:e.target.value
-        })
+        });
     }
     function changeHandler3(e){
         setnewdata({
            ...newdata, number:e.target.value
-        })
+        });
     }
     const routeParams=useParams();
     const id=routeParams.id;
@@ -32,13 +32,13 @@ function Edituser(){
                 Name:res.data.name,
                 Email:res.data.email,
                 number:res.data.number
-            })
+            });
             console.log(newdata);
         })
         console.log(id);
     }
     useEffect(()=>{
-        getsingledata()
+        getsingledata();
     },[]);
     function submitHandler(e){
         e.preventDefault()
@@ -49,9 +49,30 @@ function Edituser(){
         }
         try{
             axios.put(`http://localhost:4000/Edit/${id}`,updatedData);
+            setnewdata({
+                Name:"",
+                Email:"",
+                number:""
+            });
+            alert("data updated successfully !!!");
         }catch(err){
             console.log("error while updating",err);
         }    
+    }
+    function deleteuser(){
+        try {
+            axios.delete(`http://localhost:4000/deleteuser/${id}`);
+            alert("user deleted successfully !!!!");
+            setnewdata({
+                Name:"",
+                Email:"",
+                number:""
+            });
+            alert("user updated successfully !!!!1");
+        }catch(err){
+            console.log("error while making delete request",err);
+        }
+        
     }
     
     
@@ -66,7 +87,7 @@ function Edituser(){
              <input  type="submit" className="btn btn-primary form-control m-3"></input>
          </form>
          <h5 className="text-center text-muted">OR</h5>
-         <div className="btn btn-outline-danger form-control m-3 ">Delete</div>
+         <div className="btn btn-outline-danger form-control m-3 " onClick={deleteuser}>Delete</div>
           </div>
           
         </>

@@ -1,5 +1,5 @@
 // import logo from './logo.svg';
-import {Routes,Route} from 'react-router-dom'
+import {Routes,Route, redirect} from 'react-router-dom'
 import './App.css';
 import Navbar from './components/navbar.js';
 import Adduser from './components/adduser';
@@ -15,6 +15,7 @@ function App() {
         <Route path="/" element={<Adduser/>}/>
         <Route path="/get" element={<Getallusers/>}></Route>
         <Route path={`/Edit/:id`} element={<Edituser/>}></Route>
+        {/* <Route path="/redirect"></Route> */}
       </Routes>
     </>
   );

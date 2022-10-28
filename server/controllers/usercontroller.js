@@ -42,5 +42,14 @@ const Getsingleuser=async(req,res)=>{
       console.log("error while getting each  user",err);
    }
 }
+const Deleteuser= async (req,res)=>{
+   try{
+      const id=req.params.id;
+      await userModel.findByIdAndDelete(id);
+      console.log(req.params.id);
+   }catch(err){
+      console.log("error while deleting user",err);
+   }
+}
 
-export {getfunction,postfunction,Editfunction,Getsingleuser}
+export {getfunction,postfunction,Editfunction,Getsingleuser,Deleteuser}
